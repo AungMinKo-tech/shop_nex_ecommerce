@@ -2,14 +2,13 @@
 
 namespace App\Http\Requests\Admin;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\Rule;
 
 class ProductRequest extends FormRequest
 {
-
     public function authorize(): bool
     {
         return true;
@@ -17,7 +16,6 @@ class ProductRequest extends FormRequest
 
     public function rules(): array
     {
-
         return [
             'name' => [
                 'required',
@@ -25,7 +23,7 @@ class ProductRequest extends FormRequest
                 'max:255',
             ],
             'price' => 'required|numeric|min:0',
-            'photo' => 'required|string',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,webp,heic|max:2048',
             'description' => 'required|string',
             'detail' => 'required|string',
             'category_id' => 'required|exists:categories,id',

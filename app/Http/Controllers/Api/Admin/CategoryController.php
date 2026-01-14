@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Helpers\ApiResponse;
 use App\Http\Requests\Admin\CategoryRequest;
 use App\Http\Resources\Admin\CategoryResource;
-use App\Http\Resources\CategoryResource as ResourcesCategoryResource;
 use App\Models\Category;
 
 class CategoryController extends Controller

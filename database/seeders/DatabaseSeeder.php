@@ -2,11 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -14,11 +16,39 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create the test user
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        Role::insert([
+            ['name' => 'admin'],
+            ['name' => 'staff'],
+            ['name' => 'user'],
         ]);
+        // Create the test user
+        $admin = [
+            'name' => 'John Doe',
+            'email' => 'johndoe@example.com',
+            'password' => Hash::make('Password123'),
+            'role_id' => 1
+        ];
+
+        $staff = [
+            'name' => 'Alice Doe',
+            'email' => 'alice244doe@exaple.com',
+            'password' => Hash::make('Password123'),
+            'role_id' => 2
+        ];
+
+        $user = [
+            'name' => 'Jame Doe',
+            'email' => 'jamedoe@exaple.com',
+            'password' => Hash::make('Password123'),
+            'role_id' => 3
+        ];
+
+        User::create($admin);
+        User::create($staff);
+        User::create($user);
+
+        User::factory(10)->create();
+
         Category::factory()->count(5)->create();
 
         Product::factory(30)->create();

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Resources\Admin;
+namespace App\Http\Resources\Client;
 
+use App\Http\Resources\Admin\ProductResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Request;
 
-class ProductResource extends JsonResource
+class CartResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +17,9 @@ class ProductResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'price' => $this->price,
-            'photo' => $this->photo,
-            'description' => $this->description,
-            'stock' => $this->stock,
-            'detail' => $this->detail,
+            'userId' => $this->user_id,
+            'productId' => $this->product_id,
+            'product' => new ProductResource($this->whenLoaded('product')),
         ];
     }
 }

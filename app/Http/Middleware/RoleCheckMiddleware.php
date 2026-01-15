@@ -18,7 +18,9 @@ class RoleCheckMiddleware
     {
         $user = Auth::user();
 
-        if ($user && in_array($user->role->name, $roles)) {
+        // logger($user);
+
+        if ($user && in_array((string) $user->role_id, $roles)) {
             return $next($request);
         }
 

@@ -28,4 +28,14 @@ class CommentController extends Controller
         $comment->load(['user','product']);
         return $this->successResponse( 'Comment posted successfully' , new CommentResource($comment), 201);
     }
+
+    public function destory($id){
+        $comment = Comment::find($id);
+
+        if(!$comment){
+            return $this->errorResponse('Comment Not Found',404);
+        }
+        $comment->delete();
+        return $this->successResponse("Comment Delete Successfully", 200);
+    }
 }
